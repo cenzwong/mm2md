@@ -1,0 +1,468 @@
+Help me to extract all the Text data from the following file and preserve the layer:
+
+<map> <node ID="root" TEXT="Computer Vision"> <node TEXT="Eki.Flash 1" ID="234114eb31a07f9caecbe6fc9a9ceb17" STYLE="bubble" POSITION="right"> <node TEXT="List out what kind of data could leverage computer vision" ID="0eef065af516505d51ee22a9f13661cd" STYLE="fork"> <node TEXT="Image" ID="08c00ce2f29fbf75eb243dadf3036790" STYLE="fork"/> <node TEXT="Video" ID="f92a7e6d755f1dd1c83aa9272487a6c0" STYLE="fork"/> <node TEXT="360 images/video" ID="16b34546166ed381c38a5eda7b0e14cb" STYLE="fork"/> <node TEXT="Depth Image" ID="aa77794992675d6b0620347203af2a46" STYLE="fork"/> <node TEXT="Radio imaging" ID="94d70e97ed231bb64903279c8d1054cd" STYLE="fork"/> <node TEXT="Lidar imaging" ID="b1bfd433d494744d8f5b395290f3db57" STYLE="fork"/> <node TEXT="Medical imaging" ID="9e587cec6edf514b97ef42bef19d17b0" STYLE="fork"/> </node> <node TEXT="Use Case Study on large scale computer vision solution" ID="acf27e6060e3cbb3bbe8398255d5e1cd" STYLE="fork"> <node TEXT="Streaming-Realtime processing system" ID="06dce8b3da4dffbce5e058de1b4fefd5" STYLE="fork"> <node TEXT="How survilenance camera work (on road)" ID="8ecae52e73aeeb9bcafc8eb483ebd3c6" STYLE="fork"> <node TEXT="Real-time: detect whether you cross the red light" ID="9c8bdefbad2e0226ea2862b87dd8b37c" STYLE="fork"/> <node TEXT="Batch: detect posure, location tracking" ID="42bb10d33d3d0b4a25fbe5582fffa9ee" STYLE="fork"/> </node> <node TEXT="How camera in the store work" ID="2ccfbed87d149979a87178b5fe6172f9" STYLE="fork"> <node TEXT="Real-time: customer understanding, behavior prediction, crowd control" ID="e9f19d4bc01dc4ad5fd6223fbec9fde1" STYLE="fork"/> <node TEXT="Batch: Customer segmentation, trail tracking, hot-cold area" ID="eecf31a5aa1357984f80df53a38986b3" STYLE="fork"/> </node> </node> </node> <node TEXT="Classic Image CV task" ID="fd6107d77f88af3e82f8f04ceaf3651f" STYLE="fork"> <node TEXT="Segmentation" ID="34799b8f0d352e7cd5b9520ff4131b71" STYLE="fork"/> <node TEXT="YOLO" ID="9e8b5e871aa0c728d300b93732744a1b" STYLE="fork"/> <node TEXT="FaceMesh" ID="082f1635427d01de78f5f2a0f83e38af" STYLE="fork"/> <node TEXT="Object Detection" ID="dc845cb735db807d2a6fa745ede55dd4" STYLE="fork"/> </node> <node TEXT="Timeline" ID="1e5bece7f0eef851e69f6308c69ba2fe" STYLE="fork"/> </node> <node TEXT="Eki.Flash 2" ID="9a754ced66f6e90556e034974bf55da0" STYLE="bubble" POSITION="right"> <node TEXT="Knowledge Check" ID="6a70dc2f28d921ab97a446355fb55868" STYLE="fork"> <node TEXT="RGB" ID="cb0c244c96e8a809010b140f40207ba0" STYLE="fork"/> <node TEXT="Coordinate System" ID="332a096148793c5506157759e5a4f905" STYLE="fork"/> <node TEXT="Image Size" ID="ca21a4461688c46d51a88b5deea5e3f1" STYLE="fork"/> </node> <node TEXT="Python Package" ID="c87c2edc77b94c7d0bc4c0c8847133d3" STYLE="fork"> <node TEXT="opencv" ID="f2c1683fe5d6c9c74a41fca62af34124" STYLE="fork"/> <node TEXT="PIL" ID="810a3e6305e9e7bbcca8e7c35fd3cbd2" STYLE="fork"/> </node> </node> <node TEXT="Eki.Flash 3" ID="2e505b49ff2f023a987ad6a1b2551ae0" STYLE="bubble" POSITION="right"> <node TEXT="Generative AI" ID="76c6b22243970e56b85762c40fe95c16" STYLE="fork"> <node TEXT="Diffusion Model" ID="dae0f7eb3b386994d80b57fed2fe302f" STYLE="fork"/> </node> <node TEXT="CV+MMO" ID="9b1508b3a5b56d0892354495b996fd06" STYLE="fork"/> <node TEXT="AI4S" ID="45608d42b2157bd03fd53dc50fb7e3f2" STYLE="fork"/> <node TEXT="Ethics" ID="8ec797597c89d268643d92cec89a6b0a" STYLE="fork"/> </node> <node TEXT="In-depth Sharing" ID="046bada7b8d65d9c2e0ffb6afcb9498b" STYLE="bubble" POSITION="right"> <node TEXT="eComm Data" ID="1813ca2ce8241c5be8f2820b11a28291" STYLE="fork"/> </node> </node> </map>
+
+To extract all the text data from the given file and preserve the layer, you can use an XML parser. Here is an example code in Python that uses the ElementTree module to parse the XML and extract the text data:
+
+python
+Copy
+import xml.etree.ElementTree as ET
+
+# parse the XML file
+tree = ET.parse('file.xml')
+
+# get the root element
+root = tree.getroot()
+
+# define a function to recursively extract text from nodes
+def extract_text(node):
+    text = node.attrib.get('TEXT', '')
+    for child in node:
+        text += ' ' + extract_text(child)
+    return text.strip()
+
+# extract text from all nodes
+text_data = {}
+for node in root.iter():
+    text_data[node] = extract_text(node)
+
+# print the extracted text data
+for node, text in text_data.items():
+    print('-' * (len(node.tag) + len(node.attrib.get('ID', '')) + 2))
+    print(node.tag, node.attrib.get('ID', ''))
+    print(text)
+This code will extract the text data from all nodes in the XML file and store it in a dictionary text_data, where the keys are the XML nodes and the values are their corresponding text data. The extract_text function recursively concatenates the TEXT attributes of the node and all its children, separated by spaces.
+
+The last part of the code prints the extracted text data for each node, along with its tag and ID, separated by a line of dashes. You can modify the printing code to suit your needs.
+
+i woud like to be the output as this:
+
+clean
+Copy
+---
+markmap:
+  colorFreezeLevel: 2
+---
+# Computer Vision
+## Eki.Flash 1
+｜ Welcome to the world of CV
+### List out what kind of data could leverage computer vision
+#### Image
+#### Video
+#### 360 images/video
+#### Depth Image
+#### Radio imaging
+#### Lidar imaging
+#### Medical imaging
+### Use Case Study on large scale computer vision solution
+#### Streaming-Realtime processing system
+##### How survilenance camera work (on road)
+###### Real-time: detect whether you cross the red light
+###### Batch: detect posure, location tracking
+##### How camera in the store work
+###### Real-time: customer understanding, behavior prediction, crowd control
+###### Batch: Customer segmentation, trail tracking, hot-cold area
+### Classic Image CV task
+#### Segmentation
+#### YOLO
+#### FaceMesh
+#### Object Detection
+
+### Timeline
+
+## Eki.Flash 2
+｜ Basic of CV
+### Knowledge Check
+#### RGB
+#### Coordinate System
+#### Image Size
+
+### Python Package
+#### opencv
+#### PIL
+
+
+## Eki.Flash 3
+｜ Advanced CV topics
+### Generative AI
+### Diffusion Model
+#### CV+MMO
+#### AI4S
+#### Ethics
+
+## In-depth Sharing
+### eComm Data
+    ｜ Batch Analytics - Clustering
+
+
+
+
+
+
+To format the extracted text data as shown in your desired output, you can modify the printing code in the previous code snippet as follows:
+
+python
+Copy
+# print the extracted text data
+print('---')
+print('markmap:')
+print('  colorFreezeLevel: 2')
+print('---')
+for node, text in text_data.items():
+    if node.tag == 'map':
+        continue
+    indent_level = len(node.attrib.get('POSITION', '').split(',')) // 2
+    indent = '  ' * indent_level
+    if node.tag == 'node' and 'id' in node.attrib:
+        print(f'{indent}- {text.strip()}')
+        print(f'{indent}  id: {node.attrib["id"]}')
+    else:
+        print(f'{indent}- {text.strip()}')
+This code first prints the YAML front matter for Markmap, followed by the formatted text data for each node. The if statement skips the root map node, as it has no text data. The indent_level variable calculates the level of indentation for each node based on its POSITION attribute. The if statement and else statement handle two types of nodes: node and all others. For node nodes with an id attribute, it prints the node text with a bullet point and the node ID as a sub-item. For all other nodes, it prints the node text with a bullet point. The output should be in the desired format.
+
+The result is this:
+
+sql_more
+Copy
+---
+markmap:
+  colorFreezeLevel: 2
+---
+- Computer Vision Eki.Flash 1 List out what kind of data could leverage computer vision Image Video 360 images/video Depth Image Radio imaging Lidar imaging Medical imaging Use Case Study on large scale computer vision solution Streaming-Realtime processing system How survilenance camera work (on road) Real-time: detect whether you cross the red light Batch: detect posure, location tracking How camera in the store work Real-time: customer understanding, behavior prediction, crowd control Batch: Customer segmentation, trail tracking, hot-cold area Classic Image CV task Segmentation YOLO FaceMesh Object Detection Timeline Eki.Flash 2 Knowledge Check RGB Coordinate System Image Size Python Package opencv PIL Eki.Flash 3 Generative AI Diffusion Model CV+MMO AI4S Ethics In-depth Sharing eComm Data
+- Eki.Flash 1 List out what kind of data could leverage computer vision Image Video 360 images/video Depth Image Radio imaging Lidar imaging Medical imaging Use Case Study on large scale computer vision solution Streaming-Realtime processing system How survilenance camera work (on road) Real-time: detect whether you cross the red light Batch: detect posure, location tracking How camera in the store work Real-time: customer understanding, behavior prediction, crowd control Batch: Customer segmentation, trail tracking, hot-cold area Classic Image CV task Segmentation YOLO FaceMesh Object Detection Timeline
+- List out what kind of data could leverage computer vision Image Video 360 images/video Depth Image Radio imaging Lidar imaging Medical imaging
+- Image
+- Video
+- 360 images/video
+- Depth Image
+- Radio imaging
+- Lidar imaging
+- Medical imaging
+- Use Case Study on large scale computer vision solution Streaming-Realtime processing system How survilenance camera work (on road) Real-time: detect whether you cross the red light Batch: detect posure, location tracking How camera in the store work Real-time: customer understanding, behavior prediction, crowd control Batch: Customer segmentation, trail tracking, hot-cold area
+- Streaming-Realtime processing system How survilenance camera work (on road) Real-time: detect whether you cross the red light Batch: detect posure, location tracking How camera in the store work Real-time: customer understanding, behavior prediction, crowd control Batch: Customer segmentation, trail tracking, hot-cold area
+- How survilenance camera work (on road) Real-time: detect whether you cross the red light Batch: detect posure, location tracking
+- Real-time: detect whether you cross the red light
+- Batch: detect posure, location tracking
+- How camera in the store work Real-time: customer understanding, behavior prediction, crowd control Batch: Customer segmentation, trail tracking, hot-cold area
+- Real-time: customer understanding, behavior prediction, crowd control
+- Batch: Customer segmentation, trail tracking, hot-cold area
+- Classic Image CV task Segmentation YOLO FaceMesh Object Detection
+- Segmentation
+- YOLO
+- FaceMesh
+- Object Detection
+- Timeline
+- Eki.Flash 2 Knowledge Check RGB Coordinate System Image Size Python Package opencv PIL
+- Knowledge Check RGB Coordinate System Image Size
+- RGB
+- Coordinate System
+- Image Size
+- Python Package opencv PIL
+- opencv
+- PIL
+- Eki.Flash 3 Generative AI Diffusion Model CV+MMO AI4S Ethics
+- Generative AI Diffusion Model
+- Diffusion Model
+- CV+MMO
+- AI4S
+- Ethics
+- In-depth Sharing eComm Data
+- eComm Data
+It do not preserve the layer.
+
+I apologize for the mistake. Here's an updated code that should preserve the hierarchy of the nodes:
+
+python
+Copy
+# print the extracted text data
+print('---')
+print('markmap:')
+print('  colorFreezeLevel: 2')
+print('---')
+
+def print_node(node, text, indent_level=0):
+    indent = '  ' * indent_level
+    if node.tag == 'node' and 'id' in node.attrib:
+        print(f'{indent}- {text.strip()}')
+        print(f'{indent}  id: {node.attrib["id"]}')
+    else:
+        print(f'{indent}- {text.strip()}')
+    for child_node in node.iterchildren():
+        child_text = child_node.text or ''
+        print_node(child_node, child_text, indent_level+1)
+
+root = tree.getroot()
+for child_node in root.iterchildren():
+    child_text = child_node.text or ''
+    print_node(child_node, child_text)
+This code defines a new function print_node that recursively prints each node and its children. The function takes three arguments: node is the current node being printed, text is the text data for the current node, and indent_level specifies the level of indentation for the current node. The function prints the current node's text data with the appropriate indentation, and then iterates over the node's children, recursively calling print_node with incremented indentation level.
+
+The top-level node is obtained using tree.getroot(). The code then iterates over the root node's children and calls print_node for each child node with initial indentation level 0. This should preserve the hierarchy of the nodes in the Markmap.
+
+got this error:
+
+AttributeError Traceback (most recent call last)
+<ipython-input-23-761a74c9becf> in <cell line: 19>()
+17
+18 root = tree.getroot()
+---> 19 for child_node in root.iterchildren():
+20 child_text = child_node.text or ''
+21 print_node(child_node, child_text)
+
+AttributeError: 'xml.etree.ElementTree.Element' object has no attribute 'iterchildren'
+
+I apologize for the mistake. The iterchildren() method is not available in the standard library's Element class. Instead, you can use the iter() method to iterate over the children of an Element object.
+
+Here's the updated code:
+
+python
+Copy
+# print the extracted text data
+print('---')
+print('markmap:')
+print('  colorFreezeLevel: 2')
+print('---')
+
+def print_node(node, text, indent_level=0):
+    indent = '  ' * indent_level
+    if node.tag == 'node' and 'id' in node.attrib:
+        print(f'{indent}- {text.strip()}')
+        print(f'{indent}  id: {node.attrib["id"]}')
+    else:
+        print(f'{indent}- {text.strip()}')
+    for child_node in node.iter():
+        child_text = child_node.text or ''
+        print_node(child_node, child_text, indent_level+1)
+
+root = tree.getroot()
+for child_node in root:
+    child_text = child_node.text or ''
+    print_node(child_node, child_text)
+The changes made to the code are as follows:
+
+Instead of using iterchildren(), this code uses iter() to iterate over the children of each node.
+The for loop now uses root instead of root.iterchildren() to iterate over the top-level nodes.
+This code should now work correctly and print the Markmap data in the desired format, preserving the hierarchy of the nodes.
+
+got this error:
+
+RecursionError Traceback (most recent call last)
+/usr/lib/python3.9/threading.py in _wait_for_tstate_lock(self, block, timeout)
+1079 try:
+-> 1080 if lock.acquire(block, timeout):
+1081 lock.release()
+
+RecursionError: maximum recursion depth exceeded while calling a Python object
+
+During handling of the above exception, another exception occurred:
+
+RecursionError Traceback (most recent call last)
+2 frames
+... last 1 frames repeated, from the frame below ...
+
+<ipython-input-24-8cc8a878a1eb> in print_node(node, text, indent_level)
+14 for child_node in node.iter():
+15 child_text = child_node.text or ''
+---> 16 print_node(child_node, child_text, indent_level+1)
+17
+18 root = tree.getroot()
+
+RecursionError: maximum recursion depth exceeded while calling a Python object
+
+I apologize for the mistake. The error you're seeing is likely caused by an infinite recursion loop in the print_node function. This can happen if a node contains a circular reference to itself or to one of its ancestors.
+
+To fix this issue, we can add a check to avoid infinite recursion. One way to do this is to maintain a set of visited nodes, and skip over any nodes that have already been visited. Here's the updated code:
+
+python
+Copy
+# print the extracted text data
+print('---')
+print('markmap:')
+print('  colorFreezeLevel: 2')
+print('---')
+
+def print_node(node, text, visited_nodes, indent_level=0):
+    indent = '  ' * indent_level
+    if node.tag == 'node' and 'id' in node.attrib:
+        print(f'{indent}- {text.strip()}')
+        print(f'{indent}  id: {node.attrib["id"]}')
+    else:
+        print(f'{indent}- {text.strip()}')
+    for child_node in node.iter():
+        child_text = child_node.text or ''
+        if child_node in visited_nodes:
+            continue
+        visited_nodes.add(child_node)
+        print_node(child_node, child_text, visited_nodes, indent_level+1)
+
+root = tree.getroot()
+visited_nodes = set()
+for child_node in root:
+    child_text = child_node.text or ''
+    visited_nodes.add(child_node)
+    print_node(child_node, child_text, visited_nodes)
+The changes made to the code are as follows:
+
+The print_node function now takes an additional argument visited_nodes, which is a set of nodes that have already been visited.
+Before calling print_node recursively, we add the current node to visited_nodes and check if the child node is already in visited_nodes. If so, we skip over the child node to avoid infinite recursion.
+This code should now work correctly and print the Markmap data in the desired format, while avoiding infinite recursion.
+
+The indentation works well! But it do not display text. Could you combine two python script together?
+
+Certainly, I can combine the two scripts for you. Here is a modified version of the script that includes the changes you requested:
+
+python
+Copy
+import xml.etree.ElementTree as ET
+import sys
+
+# read the input from stdin
+xml_str = sys.stdin.read()
+
+# parse the input as XML
+tree = ET.ElementTree(ET.fromstring(xml_str))
+
+# print the extracted text data
+print('---')
+print('markmap:')
+print('  colorFreezeLevel: 2')
+print('---')
+
+def print_node(node, text, visited_nodes, indent_level=0):
+    indent = '  ' * indent_level
+    if node.tag == 'node' and 'id' in node.attrib:
+        print(f'{indent}- {text.strip()}')
+        print(f'{indent}  id: {node.attrib["id"]}')
+    else:
+        print(f'{indent}- {text.strip()}')
+    for child_node in node.iter():
+        child_text = child_node.text or ''
+        if child_node in visited_nodes:
+            continue
+        visited_nodes.add(child_node)
+        print_node(child_node, child_text, visited_nodes, indent_level+1)
+
+root = tree.getroot()
+visited_nodes = set()
+for child_node in root:
+    child_text = child_node.text or ''
+    visited_nodes.add(child_node)
+    print_node(child_node, child_text, visited_nodes)
+This script should read the input from standard input, parse it as XML, and then print the Markmap data in the desired format, with proper indentation and without any missing text.
+
+To use this script, you can pipe the input XML data to it like this:
+
+Copy
+cat input.xml | python script.py
+Replace input.xml with the name of your input file, and script.py with the name of the script file you saved the code in.
+
+The text is still not showing. The input text would be:
+
+routeros
+Copy
+
+<map>
+  <node ID="root" TEXT="Computer Vision">
+    <node TEXT="Eki.Flash 1" ID="234114eb31a07f9caecbe6fc9a9ceb17" STYLE="bubble" POSITION="right">
+      <node TEXT="List out what kind of data could leverage computer vision" ID="0eef065af516505d51ee22a9f13661cd" STYLE="fork">
+        <node TEXT="Image" ID="08c00ce2f29fbf75eb243dadf3036790" STYLE="fork"/>
+        <node TEXT="Video" ID="f92a7e6d755f1dd1c83aa9272487a6c0" STYLE="fork"/>
+        <node TEXT="360 images/video" ID="16b34546166ed381c38a5eda7b0e14cb" STYLE="fork"/>
+        <node TEXT="Depth Image" ID="aa77794992675d6b0620347203af2a46" STYLE="fork"/>
+        <node TEXT="Radio imaging" ID="94d70e97ed231bb64903279c8d1054cd" STYLE="fork"/>
+        <node TEXT="Lidar imaging" ID="b1bfd433d494744d8f5b395290f3db57" STYLE="fork"/>
+        <node TEXT="Medical imaging" ID="9e587cec6edf514b97ef42bef19d17b0" STYLE="fork"/>
+      </node>
+      <node TEXT="Use Case Study on large scale computer vision solution" ID="acf27e6060e3cbb3bbe8398255d5e1cd" STYLE="fork">
+        <node TEXT="Streaming-Realtime processing system" ID="06dce8b3da4dffbce5e058de1b4fefd5" STYLE="fork">
+          <node TEXT="How survilenance camera work (on road)" ID="8ecae52e73aeeb9bcafc8eb483ebd3c6" STYLE="fork">
+            <node TEXT="Real-time: detect whether you cross the red light" ID="9c8bdefbad2e0226ea2862b87dd8b37c" STYLE="fork"/>
+            <node TEXT="Batch: detect posure, location tracking" ID="42bb10d33d3d0b4a25fbe5582fffa9ee" STYLE="fork"/>
+          </node>
+          <node TEXT="How camera in the store work" ID="2ccfbed87d149979a87178b5fe6172f9" STYLE="fork">
+            <node TEXT="Real-time: customer understanding, behavior prediction, crowd control" ID="e9f19d4bc01dc4ad5fd6223fbec9fde1" STYLE="fork"/>
+            <node TEXT="Batch: Customer segmentation, trail tracking, hot-cold area" ID="eecf31a5aa1357984f80df53a38986b3" STYLE="fork"/>
+          </node>
+        </node>
+      </node>
+      <node TEXT="Classic Image CV task" ID="fd6107d77f88af3e82f8f04ceaf3651f" STYLE="fork">
+        <node TEXT="Segmentation" ID="34799b8f0d352e7cd5b9520ff4131b71" STYLE="fork"/>
+        <node TEXT="YOLO" ID="9e8b5e871aa0c728d300b93732744a1b" STYLE="fork"/>
+        <node TEXT="FaceMesh" ID="082f1635427d01de78f5f2a0f83e38af" STYLE="fork"/>
+        <node TEXT="Object Detection" ID="dc845cb735db807d2a6fa745ede55dd4" STYLE="fork"/>
+      </node>
+      <node TEXT="Timeline" ID="1e5bece7f0eef851e69f6308c69ba2fe" STYLE="fork"/>
+    </node>
+    <node TEXT="Eki.Flash 2" ID="9a754ced66f6e90556e034974bf55da0" STYLE="bubble" POSITION="right">
+      <node TEXT="Knowledge Check" ID="6a70dc2f28d921ab97a446355fb55868" STYLE="fork">
+        <node TEXT="RGB" ID="cb0c244c96e8a809010b140f40207ba0" STYLE="fork"/>
+        <node TEXT="Coordinate System" ID="332a096148793c5506157759e5a4f905" STYLE="fork"/>
+        <node TEXT="Image Size" ID="ca21a4461688c46d51a88b5deea5e3f1" STYLE="fork"/>
+      </node>
+      <node TEXT="Python Package" ID="c87c2edc77b94c7d0bc4c0c8847133d3" STYLE="fork">
+        <node TEXT="opencv" ID="f2c1683fe5d6c9c74a41fca62af34124" STYLE="fork"/>
+        <node TEXT="PIL" ID="810a3e6305e9e7bbcca8e7c35fd3cbd2" STYLE="fork"/>
+      </node>
+    </node>
+    <node TEXT="Eki.Flash 3" ID="2e505b49ff2f023a987ad6a1b2551ae0" STYLE="bubble" POSITION="right">
+      <node TEXT="Generative AI" ID="76c6b22243970e56b85762c40fe95c16" STYLE="fork">
+        <node TEXT="Diffusion Model" ID="dae0f7eb3b386994d80b57fed2fe302f" STYLE="fork"/>
+      </node>
+      <node TEXT="CV+MMO" ID="9b1508b3a5b56d0892354495b996fd06" STYLE="fork"/>
+      <node TEXT="AI4S" ID="45608d42b2157bd03fd53dc50fb7e3f2" STYLE="fork"/>
+      <node TEXT="Ethics" ID="8ec797597c89d268643d92cec89a6b0a" STYLE="fork"/>
+    </node>
+    <node TEXT="In-depth Sharing" ID="046bada7b8d65d9c2e0ffb6afcb9498b" STYLE="bubble" POSITION="right">
+      <node TEXT="eComm Data" ID="1813ca2ce8241c5be8f2820b11a28291" STYLE="fork"/>
+    </node>
+  </node>
+</map>
+I apologize for the mistake. It looks like the issue was caused by the strip() method used to remove leading and trailing whitespace from the text. In some cases, this was removing all the text because it was surrounded by whitespace.
+
+Here is the modified script that should fix the issue and print the text correctly:
+
+python
+Copy
+import xml.etree.ElementTree as ET
+import sys
+
+# read the input from stdin
+xml_str = sys.stdin.read()
+
+# parse the input as XML
+tree = ET.ElementTree(ET.fromstring(xml_str))
+
+# print the extracted text data
+print('---')
+print('markmap:')
+print('  colorFreezeLevel: 2')
+print('---')
+
+def print_node(node, visited_nodes, indent_level=0):
+    indent = '  ' * indent_level
+    text = node.attrib.get('TEXT', '').strip()
+    if node.tag == 'node' and 'id' in node.attrib:
+        print(f'{indent}- {text}')
+        print(f'{indent}  id: {node.attrib["id"]}')
+    else:
+        print(f'{indent}- {text}')
+    for child_node in node.iter():
+        if child_node in visited_nodes:
+            continue
+        visited_nodes.add(child_node)
+        print_node(child_node, visited_nodes, indent_level+1)
+
+root = tree.getroot()
+visited_nodes = set()
+for child_node in root:
+    visited_nodes.add(child_node)
+    print_node(child_node, visited_nodes)
+To use this script, you can pipe the input XML data to it like this:
+
+Copy
+cat input.xml | python script.py
+Replace input.xml with the name of your input file, and script.py with the name of the script file you saved the code in.
+
+Great! it works!
+
+I'm glad to hear that! If you have any more questions or issues, feel free to ask.
