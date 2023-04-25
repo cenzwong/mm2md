@@ -1,0 +1,44 @@
+---
+markmap:
+  colorFreezeLevel: 2
+---
+- Computer Vision
+  - Flash 1
+    - List out what kind of data could leverage computer vision
+      - Image
+      - Video
+      - 360 images/video
+      - Depth Image
+      - Radio imaging
+      - Lidar imaging
+      - Medical imaging
+    - Use Case Study on large scale computer vision solution
+      - Streaming-Realtime processing system
+        - How survilenance camera work (on road)
+          - Real-time: detect whether you cross the red light
+          - Batch: detect posure, location tracking
+        - How camera in the store work
+          - Real-time: customer understanding, behavior prediction, crowd control
+          - Batch: Customer segmentation, trail tracking, hot-cold area
+    - Classic Image CV task
+      - Segmentation
+      - YOLO
+      - FaceMesh
+      - Object Detection
+    - Timeline
+  - Flash 2
+    - Knowledge Check
+      - RGB
+      - Coordinate System
+      - Image Size
+    - Python Package
+      - opencv
+      - PIL
+  - Flash 3
+    - Generative AI
+      - Diffusion Model
+    - CV+MMO
+    - AI4S
+    - Ethics
+  - In-depth Sharing
+    - eComm Data
