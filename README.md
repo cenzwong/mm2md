@@ -3,6 +3,9 @@ Convert FreeMind to Markdown. Created by ChatGPT
 
 Colab: https://colab.research.google.com/drive/1vQba6WMsr4n4pHyHtZ9Bx785hIQaPcVv?usp=sharing
 
+The freemind is generated from Lark
+
+
 ```python
 import xml.etree.ElementTree as ET
 import sys
